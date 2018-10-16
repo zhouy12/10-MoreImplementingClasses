@@ -2,8 +2,8 @@
 A   CapitalT   class and methods that use the Cross class.
 
 Authors: David Mutchler, Vibha Alangar, Dave Fisher, Amanda Stouder,
-         their colleagues and PUT_YOUR_NAME_HERE.
-"""  # TODO: 1. PUT YOUR NAME IN THE ABOVE LINE.
+         their colleagues and Michelle.
+"""  # DONE: 1. PUT YOUR NAME IN THE ABOVE LINE.
 
 import rosegraphics as rg
 
@@ -151,6 +151,16 @@ class CapitalT(object):
         #   Implement this method
         #   Note: you will need to also implement attach_to before testing
         # --------------------------------------------------------------
+        self.center = intersection_center
+        self.height = height
+        self.width = width
+        self.thickness = letter_thickness
+        hrectp1 = rg.Point(intersection_center.x/2-width/2, intersection_center.y/2-letter_thickness/2)
+        hrectp2 = rg.Point(intersection_center.x/2+width/2, intersection_center.y/2+letter_thickness/2)
+        vrectp1 = rg.Point(intersection_center.x/2-letter_thickness/2, intersection_center.y/2+letter_thickness/2)
+        vrectp2 = rg.Point(intersection_center.x/2+letter_thickness/2, intersection_center.y/2-letter_thickness/2)
+        self.h_rect = rg.Rectangle(hrectp1, hrectp2)
+        self.v_rect = rg.Rectangle(vrectp1, vrectp2)
 
     def attach_to(self, window):
         """
@@ -176,6 +186,8 @@ class CapitalT(object):
         #   Implement and test this method by looking at the console and
         #     the graphics window (compare it to simple_t.pdf)
         # --------------------------------------------------------------
+        self.h_rect.attach_to(window)
+        self.v_rect.attach_to(window)
 
     def set_colors(self, fill_color, outline_color):
         """
@@ -204,6 +216,10 @@ class CapitalT(object):
         #     run_test method in main. Compare the graphics window to
         #     set_colors.pdf.
         # --------------------------------------------------------------
+        self.v_rect.fill_color = fill_color
+        self.h_rect.fill_color = fill_color
+        self.v_rect.outline_color = outline_color
+        self.h_rect.outline_color = outline_color
 
     def move_by(self, dx, dy):
         """
@@ -235,6 +251,10 @@ class CapitalT(object):
         #     move_by.pdf. Note: the pdf shows the different locations
         #     that the T moves through, but there is only 1 T at any moment.
         # --------------------------------------------------------------
+        self.v_rect.corner_2.move_by(dx, dy)
+        self.v_rect.corner_1.move_by(dx, dy)
+        self.h_rect.corner_2.move_by(dx, dy)
+        self.h_rect.corner_1.move_by(dx, dy)
 
     def clone(self):
         """
@@ -262,6 +282,9 @@ class CapitalT(object):
         #     run_test method in main. Compare the graphics window to
         #     clone.pdf.
         # --------------------------------------------------------------
+        new = CapitalT(self.center, self.width, self.height, self.thickness)
+        new.set_colors(self.h_rect.fill_color, self.v_rect.outline_color)
+        return new
 
 
 # ----------------------------------------------------------------------

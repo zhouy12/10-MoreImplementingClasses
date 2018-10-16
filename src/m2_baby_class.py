@@ -2,8 +2,8 @@
 A   Baby   class and methods that use the Baby class.
 
 Authors: David Mutchler, Vibha Alangar, Dave Fisher, Amanda Stouder,
-         their colleagues and PUT_YOUR_NAME_HERE.
-"""  # TODO: 1. PUT YOUR NAME IN THE ABOVE LINE.
+         their colleagues and Michelle.
+"""  # DONE: 1. PUT YOUR NAME IN THE ABOVE LINE.
 
 
 def main():
@@ -39,19 +39,19 @@ def main():
 
 
 # ----------------------------------------------------------------------
-# TODO: 2. Implement a class called   Baby   that has a constructor and
+# DONE: 2. Implement a class called   Baby   that has a constructor and
 #   two methods, as described below.  Your finished Baby class should
 #   cause the code above to display the expected output.  Hint: Your
 #   class will need instance variables that you must figure out.
 #
-# Constructor method
+#   constructor method
 #     What comes in:
 #        -- self
 #        -- a string for the name of the baby
 #     What goes out:  Nothing (i.e., None).
 #     Side effects:
 #        -- Sets instance variables as needed
-#        -- Prints 'Hello baby <your baby's name>!'
+#     -- Prints 'Hello baby <your baby's name>!'
 #
 # feed_baby
 #     What comes in:
@@ -93,6 +93,26 @@ def main():
 #          """ Brief description of what objects of the class 'are'. """
 #
 ########################################################################
+class Baby(object):
+    def __init__(self, name):
+        self.name = name
+        print('Hello baby ' + name + '!')
+        self.count = 1
+
+    def feed_baby(self):
+        print('Thank you for feeding baby', self.name)
+        self.count = 1
+
+    def hour_passes(self):
+        if self.count == 1:
+            print(self.name, 'is sleeping')
+            self.count = self.count+1
+        if self.count == 2:
+            print('Baby', self.name, 'is awake.  Time for food.')
+            self.count = self.count+1
+        else:
+            print('Baby', self.count, 'is CRYING uncontrollably!  Feed the Baby!')
+
 
 
 # ----------------------------------------------------------------------
